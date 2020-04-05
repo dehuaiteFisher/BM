@@ -1,1 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import math
+dt = 1/200
+zt = [0]
+t = [0]
+z = 0
+dz =[]
+for i in range(4000):
+    d = 0.08 * dt + 0.2 * np.random.normal(0, math.sqrt(dt))
+    z += d
+    dz.append(d)
+    zt.append(z)
+    t.append(i*dt)
+plt.figure(figsize=(20,10))
+plt.plot(t, zt)
+plt.xlabel('t')
+plt.ylabel('Zt and Xt')
+plt.title('a=0.6, b=0.2, c=0.4')
 
+
+a = 0.6
+b = 0.2
+c = 0.4
+xt =[0]
+x = 0
+for i in range(4000):
+    x += dz[i] - a * (x - zt[i]) * dt + (b - c * (max(xt) - x)) * dt
+    xt.append(x)
+plt.plot(t, xt)
+plt.savefig('a=5, b=3, c=1.png')
